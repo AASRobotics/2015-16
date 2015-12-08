@@ -1,5 +1,5 @@
 /**
-This is code created by max boender
+This is code created by max boender - Revision tracking in github
 */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
@@ -15,12 +15,6 @@ import com.qualcomm.robotcore.util.Range;
  * Enables control of the robot via the gamepad
  */
 public class TankDrive extends OpMode {
-
-	/*
-	 * Note: the configuration of the servos is such that
-	 * as the arm servo approaches 0, the arm position moves up (away from the floor).
-	 * Also, as the claw servo approaches 0, the claw opens up (drops the game element).
-	 */
     // TETRIX VALUES.
     final static double ARM_MIN_RANGE  = 0.20;
     final static double ARM_MAX_RANGE  = 0.90;
@@ -53,27 +47,11 @@ public class TankDrive extends OpMode {
 
 	/*
 	 * Code to run when the op mode is first enabled goes here
-	 *
+	 * INITIAL SETUP CONFIG CODE
 	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
 	 */
 	@Override
 	public void init() {
-		/*
-		 * Use the hardwareMap to get the dc motors and servos by name. Note
-		 * that the names of the devices must match the names used when you
-		 * configured your robot and created the configuration file.
-		 */
-
-		/*
-		 * For the demo Tetrix K9 bot we assume the following,
-		 *   There are two motors "motor_1" and "motor_2"
-		 *   "motor_1" is on the right side of the bot.
-		 *   "motor_2" is on the left side of the bot.
-		 *
-		 * We also assume that there are two servos "servo_1" and "servo_6"
-		 *    "servo_1" controls the arm joint of the manipulator.
-		 *    "servo_6" controls the claw joint of the manipulator.
-		 */
 		motorRight = hardwareMap.dcMotor.get("motor_2");
 		motorLeft = hardwareMap.dcMotor.get("motor_1");
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -162,13 +140,6 @@ public class TankDrive extends OpMode {
 		arm.setPosition(armPosition);
 		claw.setPosition(clawPosition);
 
-		/*
-		 * Send telemetry data back to driver station. Note that if we are using
-		 * a legacy NXT-compatible motor controller, then the getPower() method
-		 * will return a null value. The legacy NXT-compatible motor controllers
-		 * are currently write only.
-		 */
-
 		telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
         telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
@@ -179,6 +150,7 @@ public class TankDrive extends OpMode {
 	/*
 	 * Code to run when the op mode is first disabled goes here
 	 *
+   * CLEANUP
 	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
 	 */
 	@Override
@@ -187,9 +159,7 @@ public class TankDrive extends OpMode {
 	}
 
 	/*
-	 * This method scales the joystick input so for low joystick values, the
-	 * scaled value is less than linear.  This is to make it easier to drive
-	 * the robot more precisely at slower speeds.
+	 * Scales Joystick values
 	 */
 	double scaleInput(double dVal)  {
 		double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
