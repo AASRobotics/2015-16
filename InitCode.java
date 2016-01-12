@@ -1,5 +1,6 @@
 /**
-This is code created by max boender - Revision tracking in github
+This is code created by max boender - Revision tracking in Github
+BASIC CODE - RUNS SIMPLE CONTROLL OF ROBOTIC THRU TANK DRIVE
 */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
@@ -35,6 +36,7 @@ public class TankDrive extends OpMode {
 
 	DcMotor motorRight;
 	DcMotor motorLeft;
+  DcMotor motorArm;
 	Servo claw;
 	Servo arm;
 
@@ -54,6 +56,7 @@ public class TankDrive extends OpMode {
 	public void init() {
 		motorRight = hardwareMap.dcMotor.get("motor_2");
 		motorLeft = hardwareMap.dcMotor.get("motor_1");
+    motorArm = hardwareMap.dcMotor.get("motor_3")
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
 		arm = hardwareMap.servo.get("servo_1");
